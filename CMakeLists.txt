@@ -23,12 +23,15 @@ link_directories(
     ${CMAKE_SOURCE_DIR}/../IntelRDFPMathLib20U2/LIBRARY
 )
 
-enable_testing()
-include(CTest)
-
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/thirdparty/catch2/contrib")
-include(Catch)
-
 add_subdirectory(libdecimal)
-add_subdirectory(libdecimal_tests)
-add_subdirectory(general_decimal_arithmetic)
+
+if (BUILD_TESTING)
+    enable_testing()
+    include(CTest)
+    
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/thirdparty/catch2/contrib")
+    include(Catch)
+
+    add_subdirectory(libdecimal_tests)
+    add_subdirectory(general_decimal_arithmetic)
+endif()
